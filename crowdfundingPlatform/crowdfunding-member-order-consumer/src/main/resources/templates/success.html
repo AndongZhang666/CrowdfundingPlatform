@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <base th:href="@{/}"/>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <style>
+        #footer {
+            padding: 15px 0;
+            background: #fff;
+            border-top: 1px solid #ddd;
+            text-align: center;
+        }
+
+        #topcontrol {
+            color: #fff;
+            z-index: 99;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            background: #222;
+            position: relative;
+            right: 14px !important;
+            bottom: 11px !important;
+            border-radius: 3px !important;
+        }
+
+        #topcontrol:after {
+            /*top: -2px;*/
+            left: 8.5px;
+            content: "\f106";
+            position: absolute;
+            text-align: center;
+            font-family: FontAwesome;
+        }
+
+        #topcontrol:hover {
+            color: #fff;
+            background: #18ba9b;
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .label-type, .label-status, .label-order {
+            background-color: #fff;
+            color: #f60;
+            padding: 5px;
+            border: 1px #f60 solid;
+        }
+
+        #typeList :not (:first-child ) {
+            margin-top: 20px;
+        }
+
+        .label-txt {
+            margin: 10px 10px;
+            border: 1px solid #ddd;
+            padding: 4px;
+            font-size: 14px;
+        }
+
+        .panel {
+            border-radius: 0;
+        }
+
+        .progress-bar-default {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar-wrapper">
+    <div class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" th:href="@{/}" href="index.html" style="font-size: 32px;">Andong
+                        Crowdfunding Platform</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse"
+                     style="float: right;">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown"><a th:href="@{/}" class="dropdown-toggle"
+                                                data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>
+                            [[${session.loginMember.userName}]]<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a th:href="@{/member/my/crowd}"><i
+                                        class="glyphicon glyphicon-scale"></i> Member center</a></li>
+                                <li class="divider"></li>
+                                <li><a href="http://18.221.173.223/auth/member/logout"><i
+                                        class="glyphicon glyphicon-off"></i> Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="container theme-showcase" role="main">
+
+
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="text-align: center;">
+                        <div class="container-fluid">
+                            <div class="row clearfix">
+                                <div class="col-md-3 column">
+                                    <div class="progress"
+                                         style="height: 50px; border-radius: 0; position: absolute; width: 75%; right: 49px;">
+                                        <div class="progress-bar progress-bar-default"
+                                             role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                             aria-valuemax="100" style="width: 100%; height: 50px;">
+                                            <div style="font-size: 16px; margin-top: 15px;">1.
+                                                Confirm return
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                            style="right: 0; border: 10px solid #ddd; border-left-color: #88b7d5; border-width: 25px; position: absolute; border-left-color: rgba(221, 221, 221, 1); border-top-color: rgba(221, 221, 221, 0); border-bottom-color: rgba(221, 221, 221, 0); border-right-color: rgba(221, 221, 221, 0);">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 column">
+                                    <div class="progress"
+                                         style="height: 50px; border-radius: 0; position: absolute; width: 75%; right: 49px;">
+                                        <div class="progress-bar progress-bar-default"
+                                             role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                             aria-valuemax="100" style="width: 100%; height: 50px;">
+                                            <div style="font-size: 16px; margin-top: 15px;">2.
+                                                Confirm order
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                            style="right: 0; border: 10px solid #ddd; border-left-color: #88b7d5; border-width: 25px; position: absolute; border-left-color: rgba(221, 221, 221, 1); border-top-color: rgba(221, 221, 221, 0); border-bottom-color: rgba(221, 221, 221, 0); border-right-color: rgba(221, 221, 221, 0);">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 column">
+                                    <div class="progress"
+                                         style="height: 50px; border-radius: 0; position: absolute; width: 75%; right: 49px;">
+                                        <div class="progress-bar progress-bar-default"
+                                             role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                             aria-valuemax="100" style="width: 100%; height: 50px;">
+                                            <div style="font-size: 16px; margin-top: 15px;">3. Checkout</div>
+                                        </div>
+                                    </div>
+                                    <div
+                                            style="right: 0; border: 10px solid #ddd; border-left-color: #88b7d5; border-width: 25px; position: absolute; border-left-color: rgba(221, 221, 221, 1); border-top-color: rgba(221, 221, 221, 0); border-bottom-color: rgba(221, 221, 221, 0); border-right-color: rgba(221, 221, 221, 0);">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 column">
+                                    <div class="progress" style="height: 50px; border-radius: 0;">
+                                        <div class="progress-bar progress-bar-success"
+                                             role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                             aria-valuemax="100" style="width: 100%; height: 50px;">
+                                            <div style="font-size: 16px; margin-top: 15px;">4. Completed</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="container-fluid">
+                            <div class="row clearfix">
+                                <div class="col-md-12 column">
+                                    <blockquote
+                                            style="border-left: 5px solid #f60; color: #f60; padding: 0 0 0 20px;">
+                                        <b> Order Completed </b>
+                                    </blockquote>
+                                </div>
+                                <div class="col-md-12 column">
+                                    <p> Your payment is successful! Click <a th:href="@{/}">here</a> to home page</p>
+                                </div>
+
+                                <div class="container">
+                                    <div class="row clearfix">
+                                        <div class="col-md-12 column">
+                                            <blockquote>
+                                                <p>
+                                                    <i class="glyphicon glyphicon-info-sign"
+                                                       style="color: #2a6496;"></i> Notification
+                                                </p>
+                                                <br> <span style="font-size: 12px;">
+													1. Crowdfunding is not a commodity transaction, and there are certain risks. Supporters choose and support crowdfunding projects based on their own judgments, realize their dreams with the sponsors and get the rewards promised by the sponsors. <br>
+2. The crowdfunding platform only provides intermediary services such as platform cyberspace and technical support. Crowdfunding only exists between promoters and supporters. The legal consequences of using the crowdfunding platform shall be borne by the promoters and supporters. <br>
+3. After the crowdfunding is successful, the initiator will deliver the goods uniformly, and the after-sales service will be provided by the initiator; if the initiator fails to issue the return, delays the return, or does not provide the follow-up service of the return, you need to negotiate with the initiator directly. <br>
+4. If you do not agree with the above risk warning content, you have the right to choose not to support it; once you choose to support, it is deemed that you have confirmed and agreed to the above warning content.
+													</span>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container" style="margin-top: 20px;">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div id="footer">
+                    <div class="footerNav">
+                        <a rel="nofollow" th:href="@{/}"> About us</a> | <a rel="nofollow" th:href="@{/}"> Terms &
+                        Policies</a></div>
+
+                </div>
+                <div class="copyRight">Copyright ?2010-2014atguigu.com
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</div>
+<!-- /container -->
+<script src="jquery/jquery-2.1.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="script/docs.min.js"></script>
+<script src="script/back-to-top.js"></script>
+<script>
+
+    var signalPurchase = [[${session.orderProjectVO.signalPurchase}]];
+    var purchase = [[${session.orderProjectVO.purchase}]];
+
+    $('#myTab a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    });
+
+    $("#returnCountInput").change(function () {
+        var returnCount = $.trim($(this).val());
+
+        if (returnCount == null || returnCount == "") {
+            alert("Please enter a proper number！");
+
+            $(this).val(this.defaultValue);
+
+            return;
+        }
+
+        if (signalPurchase == 1 && returnCount > purchase) {
+            alert("The number is beyond limit!");
+            return;
+        }
+
+        var supportPrice = [[${session.orderProjectVO.supportPrice}]];
+
+        $("#totalAmount").text("$" + (supportPrice * returnCount));
+    });
+
+    $("#submitBtn").click(function () {
+        var returnCount = $("#returnCountInput").val();
+        window.location.href = "order/confirm/order/" + returnCount;
+    });
+</script>
+</body>
+</html>

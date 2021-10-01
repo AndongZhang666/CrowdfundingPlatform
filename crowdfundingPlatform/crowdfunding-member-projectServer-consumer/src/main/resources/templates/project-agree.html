@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <base th:href="@{/}"/>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/theme.css">
+	<style>
+#footer {
+    padding: 15px 0;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+#topcontrol {
+  color: #fff;
+  z-index: 99;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  background: #222;
+  position: relative;
+  right: 14px !important;
+  bottom: 11px !important;
+  border-radius: 3px !important;
+}
+
+#topcontrol:after {
+  /*top: -2px;*/
+  left: 8.5px;
+  content: "\f106";
+  position: absolute;
+  text-align: center;
+  font-family: FontAwesome;
+}
+
+#topcontrol:hover {
+    color: #fff;
+    background: #18ba9b;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.label-type, .label-status, .label-order {
+    background-color: #fff;
+    color: #f60;
+    padding : 5px;
+    border: 1px #f60 solid;
+}
+#typeList  :not(:first-child) {
+    margin-top:20px;
+}
+.label-text {
+    margin:0 10px;
+}
+.panel {
+    border-radius:0;
+}
+	</style>
+    <script type="text/javascript" src="jquery/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="script/docs.min.js"></script>
+    <script type="text/javascript" src="script/back-to-top.js"></script>
+	<script type="text/javascript">
+$('#myTab a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+	</script>
+  </head>
+  <body>
+ <div class="navbar-wrapper">
+      <div class="container">
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			  <div class="container">
+				  <div class="navbar-header">
+					  <a class="navbar-brand" th:href="@{/}" href="index.html" style="font-size: 32px;">Andong Crowdfunding Platform</a>
+				  </div>
+				  <div id="navbar" class="navbar-collapse collapse"
+					   style="float: right;">
+					  <ul class="nav navbar-nav">
+						  <li class="dropdown"><a th:href="@{/}" class="dropdown-toggle"
+												  data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>
+							  [[${session.loginMember.userName}]]<span class="caret"></span></a>
+							  <ul class="dropdown-menu" role="menu">
+								  <li><i
+										  class="glyphicon glyphicon-scale"></i> Member center</li>
+								  <li class="divider"></li>
+								  <li><a href="http://18.221.173.223/auth/member/logout"><i
+										  class="glyphicon glyphicon-off"></i> Logout</a></li>
+							  </ul></li>
+					  </ul>
+				  </div>
+			  </div>
+			</nav>
+      </div>
+    </div>
+
+    <div class="container theme-showcase" role="main">
+
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <nav class="navbar navbar-default" role="navigation">
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a rel="nofollow" th:href="@{/}" href="index.html"><i class="glyphicon glyphicon-home"></i> Home</a>
+                                </li>
+                                <li >
+                                    <a rel="nofollow" th:href="@{/}" href="projects.html"><i class="glyphicon glyphicon-th-large"></i>  Project Overview</a>
+                                </li>
+                                <li class="active">
+                                    <a rel="nofollow" th:href="@{/}" href="javascript:;"><i class="glyphicon glyphicon-edit"></i> Start my crowdfunding</a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" th:href="@{/}" href="minecrowdfunding.html"><i class="glyphicon glyphicon-user"></i> My crowdfunding</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <div class="panel panel-default" >
+                        <div class="panel-heading" style="text-align:center;">
+                            <h3 >
+                                Crowdfunding Sponsor agreement
+                            </h3>
+                        </div>
+                        <div class="panel-body" style="height:400px;overflow-y:auto;padding:10px;">
+<div class="test-box">
+	<p><b> Before the sponsor uses the services provided by the AndongCrowdfunding platform, please be sure to read the entire content of this agreement carefully. In the process of reading this agreement, if you disagree with this agreement or any of the terms and conditions, you should immediately stop the registration (for example, click confirm and other follow-up operations), and cancel the registration process. This agreement is legally effective as soon as the initiator clicks to confirm and agree to accept it.
+
+	</b></p>
+
+	<h5> 1 Agreement body </h5>
+
+	<p> This agreement is initiated by the owners of the Andong website (including but not limited to www.atcrowd.com and AndongCrowdfunding platform) and their affiliates ( hereinafter referred to as " Andong ") on the AndongCrowdfunding platform and projects that log in and use the AndongCrowdfunding platform Signed by people (hereinafter referred to as "promoters") </p>
+
+	<h5> 2 Definitions </h5>
+
+	<p>2.1 AndongCrowdfunding platform: The AndongCrowdfunding platform is a dream platform that can make the sponsor’s project plan a reality. It is a platform " dedicated to creating in China and realizing the dream of innovative entrepreneurs", and sponsors can initiate innovation on the AndongCrowdfunding platform The fundraising needs of the project, and promise to provide different forms of return to the supporters of the project, the supporters can express their support to the promoters by pre-purchasing the project results or related products of the promoters. </p>
+
+	<p>2.2 Sponsor: Refers to the legal person that initiated the project on the AndongCrowdfunding platform. </p>
+
+	<p>2.3 Supporters: Refers to Andong users who support the sponsor’s project . Supporters pre-purchase the derivative results and / or related products of the project by paying a certain amount of pre-purchase payment . </p>
+
+	<p>2.4 Fundraising success: refers to the amount of the contract concluded by the sponsor and the supporter with the project results and / or related products as the return target reaches or exceeds the fundraising set by the sponsor within the time set by the sponsor Amount. </p>
+
+	<p>2.5 Project success: After the fundraising of the project is successful, the initiator executes the project plan and finally forms the project outcome, and delivers the project results and / or related products to the supporter in accordance with the supporter’s pre-purchase order . </p><p>
+
+</p> <h5> 3 BACKGROUND </h5>
+
+	<p>3.1 In order to protect the legitimate rights and interests of supporters, regulate the behavior of sponsors, and maintain the order of the AndongCrowdfunding platform, this agreement is specially formulated. </p>
+
+	<p>3.2 Andong provides platform cyberspace, technical services and support for the transaction between initiators and supporters. Andong is not any of the initiators or supporters. All transactions only exist between the initiators and supporters. In the meantime , the legal consequences of using the AndongCrowdfunding platform shall be borne by the sponsors and supporters themselves. </p>
+
+	<p>3.3 Andong will conduct a formal review of the rationality of the initiated project, the matching degree of the project content and the return, etc., and only after the review can be published to the AndongCrowdfunding platform, but the approval of the project by Andong does not mean that Andong guarantees the legality of the project Or if it does not infringe the rights of any third party, the sponsor still needs to independently bear legal responsibility for the project initiated. </p>
+
+	<h5> 4 Agreement scope </h5>
+
+	<p>4.1 The content of this agreement includes the body of the agreement and various rules and operating procedures that have been published or may be published in the future on the Andong website. All rules are an integral part of this agreement and have the same legal effect as the body of the agreement. </p>
+
+	<p>4.2 When the sponsor initiates a project on the AndongCrowdfunding platform, click to confirm through the web page or choose to accept this agreement by other means, which means that it has reached an agreement with Andong and accepts all the agreed content of this agreement. This agreement will take effect when you click on the page to confirm or choose to accept this agreement in other ways. After this agreement comes into effect, the initiator shall not claim that this agreement is invalid or request to cancel this agreement on the grounds that it has not read or accepted the content of this agreement. </p>
+
+	<p>4.3 Andong has the right to modify this agreement or various rules and operating procedures from time to time as needed. If there are any changes to this agreement, Andong will notify it in the form of publicity on the website without the prior consent of the initiator. The revised agreement and rules will take effect as soon as they are publicized and become part of this agreement. If the initiator continues to log in or use the AndongCrowdfunding platform, it is deemed to have read and accepted the revised agreement. </p>
+
+	<p> 4.4 The sponsor shall exercise rights and perform obligations in accordance with this agreement. If you can not accept the provisions of this agreement , including but not limited to the revised agreement and various rules, you should immediately stop using the services provided by the AndongCrowdfunding platform. If the initiator continues to use the service, it means that he agrees and accepts the constraints of this agreement and various rules. </p>
+
+	<h5> 5 Project sponsor qualifications </h5>
+
+	<p>5.1 The project sponsor should be a registered user of the AndongCrowdfunding platform and fully understand and accept this agreement. </p>
+
+	<p>5.2 The sponsor can be a legal person or other organization and should be a legal entity legally established and registered within the territory of China that can independently bear legal responsibility. </p>
+
+	<p>5.3 Before launching the project, the sponsor should complete the necessary identity verification and qualification verification through Andong Paypay , including but not limited to the real-name verification of the business license, legal person ID card, etc. The sponsor agrees and authorizes the AndongCrowdfunding platform to publish authentication information when launching the project . </p>
+
+	<p>5.4 The sponsor shall open an account in accordance with Andong 's requirements to receive support payments from supporters. </p>
+
+	<p>5.5 If the project sponsored by the sponsor is a public welfare project, the sponsor should be a legally established non-profit organization or co-sponsor the project with a legally established non-profit organization. </p>
+
+	<p>5.6 The AndongCrowdfunding platform will limit and require other qualifications that the sponsor needs to meet according to the different types of projects to be initiated. </p>
+
+	<h5> 6 Specification Content </h5>
+
+	<p>6.1 Projects initiated on the AndongCrowdfunding platform should be innovative and executable projects, and the project goals must be clear, specific, and measurable, such as making a physical product, making a micro-film or completing An artistic creation, etc. It is not allowed to raise funds solely for charity organizations without substantial project content or to raise funds for the purpose of initiating " funding scholarships" and "funding me to travel" to meet the personal needs of the sponsors. </p>
+
+	<p>6.2 The content of the project must comply with laws and regulations and the relevant regulations of the Andong website; AndongCrowdfunding platform has the right to put forward special requirements for the project. Plagiarism or misappropriation of the results of others to initiate Crowdfunding projects is prohibited , and creative products must be original. </p>
+
+	<p>6.3 The content of the project must include " what do I want to do", "project risk", "project return", "why support is needed" and other information. At the same time, the project supporters should be fully explained to the project's risks and challenges, so that the project supporters have a comprehensive and adequate understanding of the project, so that they can make independent and prudent investment decisions. </p>
+
+	<p>6.4 The content of the project and the related project information uploaded by the initiator (including but not limited to text, pictures, videos, etc.) must be original by the initiator. If it is not original by the initiator, the initiator should have obtained the corresponding authorization from the right holder. And the right holder allows the sponsor to sub- authorize Andong and Andong 's affiliates to conduct permanent free publicity, promotion, and use on the Andong website and other official websites of Andong affiliates and offline media for the purpose of promoting the AndongCrowdfunding platform. </p>
+
+	<p>The 6.5 project must not contain offensive or insulting speech, content that violates national laws, regulations, policies, and other content that Andong deems inappropriate. Including but not limited to the following: </p>
+
+	<p>6.5.1 Prohibited items that violate national laws and regulations, such as drugs, guns, ammunition, and controlled knives; </p>
+
+	<p>6.5.2 Illegal, pornographic, obscene, gambling, violence, terror, reactionary, political and religious related; </p>
+
+	<p>6.5.3 Setting up companies, websites, shops, etc.; </p>
+
+	<p>6.5.4 Information on prohibited items such as the prohibition and restriction of sales as prescribed by laws and regulations of other countries and the Andong website. </p>
+
+	<p>6.6 It is not allowed to sell products that have been produced before the completion of the project returns, except for public welfare related projects. </p>
+
+	<p>6.7 The exclusivity of the project. During the AndongCrowdfunding platform's fundraising period , the project shall not initiate similar projects or conduct sales on any other platform at the same time. Once discovered, the project was forcibly removed from the shelves, and the breach of contract was held accountable. </p>
+
+	<p>6.8 The review of the project by AndongCrowdfunding platform only reviews the rationality of the project, the matching degree of the project content and the return, etc. The sponsor shall ensure that the content of the project initiated is legal and does not infringe the legitimate rights and interests of others. </p>
+
+	<p>6.9 When a project is initiated on the AndongCrowdfunding platform, the start time and end time of Crowdfunding should be clarified , as well as the return time after successful Crowdfunding of the project . By the end of the project, if the project Crowdfunding amount is equal to or greater than the predetermined Crowdfunding amount, the project Crowdfunding is successful; if the project Crowdfunding amount is lower than the predetermined Crowdfunding amount, the project Crowdfunding fails. </p>
+
+	<h5> 7 Project returns specification </h5>
+
+	<p>7.1 Project returns must be related to the project. The return should be the derivative results or related commodities produced by the sponsor during the project, except for public welfare related projects. </p>
+
+	<p>7.2 The sponsor promises that if the project crowdfunding is successful, the promised return to the project supporter will be honored in a timely manner; if the project crowdfunding fails, it is agreed that Andong will return the crowdfunding money to the project supporter in time, and the initiator will discuss the reasons for the failure of the project crowdfunding , etc. Explain to the project supporter. </p>
+
+	<p>7.3 The highest unit price of the project return product set on the AndongCrowdfunding platform should be lower than <b>90%</b> of the market price of the product within < b> two months </b> after the successful end of the project , otherwise it should Return the price difference to the supporter. </p>
+
+	<p>7.4 If the project returns are in kind, after the product is mass-produced, it should be distributed to the AndongCrowdfunding platform supporters who support the project first , otherwise it will be regarded as the sponsor’s breach of contract, and the liability for breach of contract and fines shall be borne. </p>
+
+	<p>7.5 If there is a dispute between the sponsor and the project supporter in the process of redeeming the return, all the responsibilities shall be borne by the sponsor. If this causes economic or reputation loss to Andong , the sponsor shall compensate Andong for related losses. </p>
+
+	<p>7.6 If the sponsor has a dispute with a third party (including but not limited to the logistics company) in the process of fulfilling the reward to the project supporter, all the responsibilities shall be borne by the sponsor. </p>
+
+	<h5> 8 Promoters Conduct </h5>
+
+	<p>8.1 After the project is approved, the sponsor may not edit or modify other project contents except for the project start time. </p>
+
+	<p>8.2 Before the successful fundraising of the project, if the sponsor needs to cancel the project for any reason, he must submit a cancellation application to the AndongCrowdfunding platform. After the AndongCrowdfunding platform has passed the review, the project will be cancelled, and all the funds raised will be returned by Andong to the supporter. </p>
+
+	<p>8.3 After the fundraising of the project is successful, the sponsor should strictly follow the project plan and actively interact with the supporters during the implementation of the project plan. </p>
+
+	<p>8.4 After the fundraising of the project is successful, if the project is delayed for some reason or cannot be implemented according to the original project plan, or the project cannot be completed due to any subjective or objective factors, the sponsor shall notify the AndongCrowdfunding platform as soon as possible , and Promptly notify the supporters through the AndongCrowdfunding platform and other channels, pay the supporters a liquidated damages, and fully refund the project support funds for unfulfilled orders. </p>
+
+	<p>8.5 The sponsor cannot initiate the project on other platforms in any form during the project's solicitation period. If this regulation is violated, Andong has the right to hold the promoters accountable. </p>
+
+	<p>8.6 The sponsor should issue project returns (project derivative results and / or related products) as promised , and the project returns should be free of quality or rights flaws. If disputes arise due to project returns, please refer to relevant national laws and regulations ( for example : " Consumer Rights Protection Law ) . </p>
+
+	<p>8.7 If the sponsor fails to complete the return before the project return date, and there is no reasonable reason, the project is deemed to be postponed. <b>If the project is postponed for more than 30 days (inclusive), it will be deemed as a failure </b> . The AndongCrowdfunding platform has the right to directly refund the support money to the supporter who has not confirmed the receipt through the system, and the sponsor shall return the support money to the AndongCrowdfunding platform in full . </p>
+
+	<p>8.8 Promoters of public welfare-related projects shall upload the relevant vouchers of the funds raised for public welfare purposes within a reasonable time after the completion of the project. </p>
+
+	<p>8.9 The sponsor should submit true and accurate project information (if there is any update to the project information, the updated information should be submitted to the AndongCrowdfunding platform in a timely manner ), and the project should be uploaded and submitted independently. </p>
+
+	<p>8.10 The sponsor shall bear the expenses incurred in preparing or submitting and completing the project by itself, and shall pay the corresponding taxes incurred due to the conduct under this agreement. </p>
+
+	<p>8.11 The sponsor shall properly keep the account and password of the AndongCrowdfunding platform. In any case, the sponsor shall be responsible for all activities that occur under the account (including but not limited to information disclosure, posting information, uploading pictures or videos, and clicking on the Internet to agree Or submit various rules and agreements, etc.) to assume legal responsibility. </p>
+
+	<p>8.12 The sponsor understands and agrees that it shall not use or allow any third party to use the sponsor’s account to engage in any violation of laws and regulations or the rights of third parties through the AndongCrowdfunding platform, including but not limited to: </p>
+
+	<p>8.12.1 Infringes on any third party's patent, trademark, copyright, trade secret or other legal rights, or violates any law or contract; </p>
+
+	<p>8.12.2 The sponsor’s behavior or project information is false, misleading, and inaccurate; </p>
+
+	<p>8.12.3 The sponsor’s behavior or project information is suspected of being illegal, threatening, abusive, harassing, defamatory, slander, deceit, fraud, infringement, obscenity, offense, profanity, or infringement of the privacy of others; </p>
+
+	<p>8.12.4 Publish any mail, promotional materials or advertising information to the recipient without the recipient’s permission; </p>
+
+	<p>8.12.5 Conduct any behavior that endangers information network security, deliberately spread malicious programs or viruses, and other behaviors that damage or interfere with normal network information services. </p>
+
+	<p>8.13 Regarding the information that is suspected of violating the law or suspected of infringing on the legal rights of others or violating this agreement published by the initiator through the AndongCrowdfunding platform, Andong has the right to modify, edit, delete, etc., according to Andong 's judgment without notifying the initiator. </p>
+
+	<p>8.14 Before the project of physical return is launched, the sponsor is obliged to actively provide samples for evaluation and review, and once the project is launched, regardless of the success or failure of crowdfunding , the prototype will not be returned. </p>
+
+	<p> 8.15 The sponsor promises not to use any intellectual property rights of AndongCrowdfunding and its affiliates without the consent of the AndongCrowdfunding platform . In particular , unless approved in writing by the AndongCrowdfunding platform, the promoters will not under any circumstance in any country or region use AndongCrowdfunding and its affiliated companies' trademarks and similar trademarks or logos in whole or in part individually or in conjunction with any other trademarks, trade names, Words, symbols, and domain names are used in combination, or applications, registrations, and other authoritative acts. The process of cooperation, its sponsors should be aware of the possible infringement of any third party AndongCrowdfunding timely notification of intellectual property platform AndongCrowdfunding platform. </p>
+
+	<p>8.16 If the promoter violates the above code of conduct and causes damage to any third party, the promoter shall independently bear all legal liabilities in his own name and compensate Andong for the losses or expenses incurred therefrom, including but not limited to loss of goodwill, etc. . </p>
+
+	<h5> 9 Support models and delivery platform service fee </h5>
+
+	<p>9.1 The delivery of support funds and the collection of platform service fees on the AndongCrowdfunding platform are all collected and paid through the third-party payment platform <b> Andong Easy Pay </b> . </p>
+
+	<p>9.2 If the promoter uses the AndongCrowdfunding platform service, Andong will charge the promoter a platform service fee of 3% of the total raised amount , unless otherwise agreed by the promoter and Andong . </p>
+
+	<p>9.3 After successful fundraising, the AndongCrowdfunding platform will deduct the platform service fee and quality guarantee deposit (if any) from the total amount raised within <b>3</b> working days after the remaining amount is <b>60%</b> b> delivered to the sponsor, and set aside the rest of the <b> 40% </b> as to ensure the success of the project and to ensure that supporters won was the return of deposit ( hereinafter referred to as " margin" ) . When the project is successful, there is no dispute, and all supporters get promised returns, Andong will deliver this part of the money to the sponsor. Unless otherwise agreed by the initiator and Andong . </p>
+
+	<p>9.4 According to the development of the market and technology, Andong reserves the right to change the ratio of margin and platform service fees. Before the change, Andong will notify the initiator of the change in an appropriate manner, including but not limited to publicizing it on the Andong website. The sponsor has the right to choose to accept or reject it. If the sponsor chooses to reject it, he should immediately stop using the services of the AndongCrowdfunding platform; if the sponsor continues to use the AndongCrowdfunding platform, it is deemed that the sponsor agrees to Andong 's fee changes. The changed fee ratio has no retrospective effect on projects that have already been released. </p>
+
+	<h5> 10 IP </h5>
+
+	<p>10.1 The sponsor promises to have legal rights to all content published and uploaded through the AndongCrowdfunding platform, and will not infringe any third party's legal rights such as portrait rights, privacy rights, patent rights, trademark rights, copyrights, and other contractual rights. </p>
+
+	<p>10.2 The sponsor grants Andong and its affiliates a non-exclusive, sublicensable, irrevocable, universal, perpetual, and free license to use any content published or uploaded through the AndongCrowdfunding platform . It can also modify, rewrite, adapt, distribute, translate, create derivative content and / or can spread, perform, and display part or all of the aforementioned content, and / or can put part or all of the aforementioned content into any Among the works that are currently known and developed in the future in any form, medium or technology. </p>
+
+	<p>10.3 The services provided by the AndongCrowdfunding platform to sponsors contain proprietary and confidential information or information protected by relevant intellectual property rights and other laws, and may also be protected by copyrights, trademarks, patents and other relevant laws. Without the written authorization of Andong or related rights holders, the promoters are not allowed to modify, sell, disseminate some or all of this information, or create derivative services or software, or decipher the original code by performing restoration engineering, reverse assembly translation, and other methods. </p>
+
+	<h5> 11 Disputes </h5>
+
+	<p>11.1 Virtual reports do not support returns, exchanges, or refunds. If there is a delivery error, missed delivery, or the quality of the virtual reports received by the supporter, the initiator should reissue it for free within seven days Or reissue. </p>
+
+	<p>11.2 In the event of a wrong or missed delivery in kind, the initiator shall reissue or reissue it free of charge within seven days. If the initiator is unable to reissue or reissue it, it shall refund the corresponding amount to the supporter. </p>
+
+	<p>11.3 If the project report has quality problems, please refer to relevant national laws and regulations ( for example : " Consumer Rights Protection Law" ) . </p>
+
+	<p>11.4 If the sponsor is negligent in handling disputes or the handling of disputes does not comply with Andong's relevant regulations, the AndongCrowdfunding platform has the right to use the reserved deposit / warranty deposit to handle supporter disputes. If the deposit is not enough to settle the dispute, the initiator is obliged to pay Andong the expenses incurred in handling the dispute. </p>
+
+	<h5> 12 Violation handling </h5>
+
+	<p>12.1 For promoters who violate this agreement or the rules of the Andong website, Andong has the right to deal with the violation, and the fines involved can be deducted from the deposit / warranty deposit . </p>
+
+	<p>12.2 If the sponsor does not voluntarily cancel the project due to force majeure before the end of the fundraising time, the sponsor shall not initiate the project again within one month. </p>
+
+	<p>12.3 If the sponsor declares that the project has failed due to force majeure or is deemed to have failed due to project delays after the successful fundraising of the project and before the return is issued, the sponsor shall not initiate the project again within three months, but If the sponsor has returned the full amount paid by the supporter, the time for re-initiating the project can be unlimited. </p>
+
+	<p>12.4 Andong has the right to unilaterally determine whether the promoter is suspected of violating regulations, and to suspend or terminate the promoter's platform use license or take other restrictive measures based on the unilateral determination result. </p>
+
+	<p>12.5 If the initiator seriously violates this agreement, the rules of the Andong website, or the national laws and regulations, it will be cleared and withdrawn from the AndongCrowdfunding platform, and the suspected criminal Andong will be transferred to the judicial authority for handling. </p>
+
+	<h5> 13 Breach </h5>
+
+	<p>13.1 If the promoter is suspected of violating relevant laws or the provisions of this agreement, causing Andong and / or Andong 's affiliates to suffer any loss, or be subject to any third-party claims, or be punished by any administrative department, the promoter shall To compensate Andong for the losses and / or expenses incurred, including reasonable attorney fees, investigation and evidence collection fees, etc., Andong has the right to deduct the relevant expenses from the security deposit / guarantee deposit , and the insufficiency will be paid by the initiator to make up. </p>
+
+	<p>13.2 If any party violates its statement, guarantee or undertaking under this agreement, and causes the other party to suffer any lawsuits, disputes, claims, penalties, etc., the breaching party shall be responsible for resolving any costs and additional charges incurred by the other party Those who are liable or suffer economic losses shall be liable for compensation. If a party breaches the contract, the observant party may require the breaching party to stop the breach within a specified time limit by way of a written notice and request it to eliminate the impact. If the breaching party fails to stop the breach on time, the observant party has the right to terminate this agreement immediately. If the promoter loses due to Andong’s own reasons, Andong ’s maximum overall liability and compensation limit to the promoter shall not exceed the total service fee that Andong has collected from the promoter under this agreement . </p>
+
+	<p>13.3 For the liquidated damages that the sponsor should bear, Andong has the right to deduct from the security deposit / guarantee deposit , and it will not be returned. </p>
+
+	<h5> 14 Termination of Agreement and Dispute Resolution </h5>
+
+	<p>14.1 Under the following circumstances, Andong may suspend, suspend or terminate the performance of the obligations under this agreement or the provision of services under this agreement in whole or in part at any time without any obligation and responsibility, until this agreement is terminated, and there is no need to obtain Sponsor’s consent: </p>
+
+	<p> The project initiated by 14.1.1 violates the AndongCrowdfunding platform usage rules or the terms of this agreement; </p>
+
+	<p>14.1.2 The sponsor does not agree to accept the provisions of this agreement (including various rules issued by Andong ), and has stopped using the services provided by the AndongCrowdfunding platform for the project sponsor; </p>
+
+	<p>14.1.3 The sponsor does not meet the qualifications that the project sponsor should have as stipulated in this agreement; </p>
+
+	<p>14.1.4 The initiated project violates laws and regulations, regulatory policies or other relevant regulations; </p>
+
+	<p> The project initiated on 14.1.5 will cause or may cause major risks to Andong's operations; </p>
+
+	<p> The project initiated by 14.1.6 has or may have the risk of obviously jeopardizing the interests of supporters; </p>
+
+	<p>14.1.7 The project cannot be continued or the return of the project cannot be realized due to reasons not attributable to Andong . </p>
+
+	<p>14.2 If the agreement is terminated due to reasons not attributable to Andong , the sponsor must be fully and independently liable for any compensation and liability caused by actions before the termination of the agreement. </p>
+
+	<p>14.3 Regardless of the termination of this agreement for any reason, it will not affect the effectiveness of successful fund-raising projects before the termination of this agreement. The sponsor shall complete the fund-raising projects, or support the project in accordance with the agreement or the provisions of this agreement. Take responsibility. </p>
+
+	<p>14.4 This agreement and all actions under this agreement shall be governed by the laws of the People's Republic of China. </p>
+
+	<p>14.5 If there is a dispute between the parties to the agreement due to the signing, performance or interpretation of this agreement, the parties shall negotiate and resolve it amicably. If the negotiation fails, either party shall bring a lawsuit to the court where the contract was signed (ie: People's Court of Xuanwu District, Nanjing City). </p>
+
+	<p>14.6 The right to interpret this agreement belongs to the AndongCrowdfunding platform. </p>
+
+	<p>
+
+		<b> Attachment: </b>
+
+	</p>
+
+	<h5> " AndongCrowdfunding Return Service Agreement" </h5>
+
+	<h5> (Note: This agreement is only applicable to technology and design crowdfunding released by the AndongCrowdfunding platform ) </h5>
+
+	<p> Whereas: </p>
+
+	<p>The sponsor initiates a project fundraising request on the AndongCrowdfunding platform ( hereinafter referred to as " Andong "), which is a subsidiary of Andong ( www.atcrowd.com ) , and promises to provide rewards to the project supporters. In order to protect the legitimate rights and interests of supporters, regulate the behavior of sponsors, and maintain the order of the Crowdfunding platform, this agreement is specially formulated. The sponsor promises to strictly fulfill the provisions of this agreement and provide customers with returns and related services in accordance with the project promises. </p>
+
+	<h5>1 . Return and exchange service of return products </h5>
+
+	<p>1.1 The sponsor promises to provide an unreasonable return and exchange service within 15 days after the supporter receives the returned product. The courier expenses incurred during the return and exchange process shall be borne by the sponsor. If the supporter chooses to return the goods, the sponsor shall refund the supporter in full within 3 working days from the date of receipt of the returned goods . If the supporter chooses to exchange the goods, the initiator shall complete the exchange process within 5 working days from the date of receipt of the replacement goods . </p>
+
+	<p>1.2 The sponsor promises to provide free maintenance or replacement services from the 16th day to 1 year after the supporter receives the return product . If the reported product has quality problems or cannot be used normally due to non-human reasons, the initiator should complete the replacement process within 5 working days from the date of receiving the replacement goods from the supporter . The courier expenses incurred during the replacement of the goods shall be borne by the initiator. </p>
+
+	<p>1.3 The following products are not suitable for unreasonable returns :</p>
+
+	<p class="indent">1.3.1 Personal customized products; </p>
+
+	<p class="indent">1.3.2 Cultural products; </p>
+
+	<p class="indent">1.3.3 Digital products such as online downloads or unpacked audio-visual products, computer software, etc.; </p>
+
+	<p class="indent">1.3.4 Delivered newspapers and periodicals; </p>
+
+	<p class="indent">1.3.5 Product quality problems caused by unauthorized repairs, misuse, collision, negligence, abuse, fluid intake, accidents, alterations, incorrect installation, or tearing or altering of labels , Machine serial number, anti-counterfeiting mark; </p>
+
+	<p class="indent">1.3.6 Other products that are not suitable for return or exchange based on the nature of the product, or that have been clearly stated that they are not suitable for return or exchange when the Crowdfunding project is initiated. </p>
+
+
+
+	<p> 1.4 In order to ensure product at <strong> <u> 1 year warranty </u> </strong> service quality within the promoters shall Andong pay the quality of bonds ( the " retention money"), as Andong To deal with customer complaints or product quality problems:
+
+	</p><p> If the initiator is Andong (or Andong affiliated company) with an existing partner, it is associated with the existing cooperative business, and Andong (or Andong affiliated company) pledges the initiator’s accounts payable, including but It is not limited to payment, deposit, etc.
+
+</p><p> If the initiator is not an Andong (or Andong affiliate) already has a partner, after the project is successfully raised , Andong will automatically deduct the following agreed amount from the funds raised by the project as a quality guarantee deposit. After all supporters received the return product <strong><u> 1 year </u></strong> , and the sponsor has properly handled all customer complaints, Andong returned the warranty to the sponsor. The specific amount requirements are as follows : </p>
+
+	<table class="table-initiate">
+
+		<tbody><tr>
+
+		<th align="center"><strong> Crowdfunding project classification </strong></th >
+
+		<th align="center"><strong> Warranty Deposit </strong></th >
+
+	<th align="center"><strong> Upper and lower limits of warranty money </strong></th >
+
+							</tr>
+
+							<tr>
+
+								<td> Mobile phones, computers, digital, office equipment, network equipment, smart devices, etc. </td>
+
+								<td rowspan ="2"> Amount raised × 2.5%</td>
+
+								<td rowspan ="9"> Lower limit: 1000 yuan < br >
+
+									Upper limit: 100,000 yuan < br >
+
+									(Ie: the minimum charge is 1,000 yuan, and the maximum charge is 100,000 yuan) </td>
+
+							</tr>
+
+							<tr>
+
+								<td> Pregnancy and infant products, children's products (children's clothing, children's shoes, toys), etc. </td>
+
+							</tr>
+
+							<tr>
+
+								<td> Air conditioners, TVs, refrigerators, washing machines, audio-visual products, etc. </td>
+
+								<td rowspan ="4"> Amount raised × 2%</td>
+
+							</tr>
+
+							<tr>
+
+								<td> Kitchen and bathroom appliances, small kitchen appliances, western-style kitchen appliances, small household appliances, personal care, etc. </td>
+
+							</tr>
+
+							<tr>
+
+								<td> Outdoor equipment, sports equipment, cycling equipment, fitness equipment, fishing supplies, vehicle electrical appliances, auto accessories, etc. </td>
+
+							</tr>
+
+							<tr>
+
+								<td> Home textiles, furniture, lamps, building materials, kitchen and bathroom products, cleaning products, kitchen utensils, daily necessities, adult products, pet products, etc. </td>
+
+							</tr>
+
+							<tr>
+
+								<td> Daily chemicals (beauty, skin care, toiletries), etc. </td>
+
+								<td rowspan ="3"> Amount raised × 1%</td>
+
+							</tr>
+
+							<tr>
+
+								<td> Books, stationery items </td>
+
+							</tr>
+
+							<tr>
+
+								<td> Other </td>
+
+							</tr>
+
+						</tbody ></table>
+
+						<h5>2 . Delay in return (delivery) compensation </h5>
+
+						<p> After the success of the Crowdfunding project, the sponsor should ensure that the supporters are provided with rewards in a timely manner as promised by the project. In the event of delayed returns or untimely delivery, the sponsor shall compensate the supporter in accordance with the following standards. Except for the case of a full refund caused by the failure of the project, the compensation payment time for other cases shall not be later than the time when the supporter receives the goods. </p>
+
+						<p>
+
+						</p><table class="table-initiate">
+
+						<tbody ><tr>
+
+						<th> Delayed delivery days (unit: day) </th >
+
+						<th> Delayed delivery of liquidated damages / other measures </th >
+
+						</tr>
+
+						<tr>
+
+							<td>X ≤ 30</td>
+
+							<td> Liquidated damages: 5% of the total amount of unfulfilled orders </td>
+
+						</tr>
+
+						<tr>
+
+							<td>X>30</td>
+
+							<td>If the project fails, pay a penalty of 5% of the total amount of the fulfilled order , and refund the Crowdfunding money of the unfulfilled order to the supporter in full, and the unfulfilled order will be cancelled </td>
+
+						</tr>
+
+					</tbody ></table>
+
+					<p></p>
+
+					<p>X is the number of days of delayed delivery, starting from the day after the last day of the promised return period. If the delay reaches 30 days, it is deemed that the sponsor has been unable to provide returns and the project has failed. The sponsor should issue an apology or explanation to all supporters, and complete the refund of unfulfilled orders within 3 days. If the sponsor has reached an agreement with the supporter when the delay is less than 30 days, unless otherwise agreed upon the delivery time. </p>
+
+					<h5>3 . Service response timeliness </h5>
+
+					<p> In the process of project return, the sponsor should actively respond to various questions and needs raised by the supporter, Andong or Andong Crowdfunding platform. For questions e-mail or the needs of postal items, it should be in 2 working days to reply to comments or processing of the application for processing. If the sponsor fails to respond to the comments or deal with it within the time specified above, the Andong or AndongCrowdfunding platform has the right to respond or deal with it on behalf of the sponsor from the perspective of the customer-first concept. The sponsor should provide the client with relevant opinions in accordance with the processing opinions of the Andong or AndongCrowdfunding platform. Service, the loss or expenses incurred as a result shall be borne by the initiator. </p>
+
+					<h5>4 . Liability for breach of contract </h5>
+
+					<p>4.1 If the sponsor is suspected of violating relevant laws or the provisions of this agreement, causing Andong or AndongCrowdfunding platform to suffer any losses, including but not limited to, litigation, dispute, and claim by any third party, and punishment by any administrative department, initiate The person shall compensate the Andong or AndongCrowdfunding platform for the losses and / or expenses incurred, including reasonable attorney fees, investigation and evidence collection fees, etc. </p>
+
+					<p>4.2 For the liquidated damages that the sponsor should bear, Andong or AndongCrowdfunding platform has the right to directly deduct from the sponsor's security deposit and warranty money or other funds controlled by Andong or AndongCrowdfunding platform, and will not return it. <b>If the security deposit and warranty deposit are not enough to pay, the Andong or Andong Crowdfunding platform has the right to continue to claim compensation from the sponsor. </b></p>
+
+					<h5>5 , other </h5>
+
+					<p>5.1 The sponsor agrees to abide by various rules and operating procedures that have been published or may be published in the future on the Andong website ( www.atcrowd.com ) and any of its websites. For those who violate the agreement or regulations and cause losses to the customer, the sponsor is willing to accept various penalties from the Andong or Andong Crowdfunding platform. </p>
+
+					<p>5.2 Any dispute arising from or related to this agreement shall be settled through friendly negotiation between the two parties. If the negotiation fails, either party shall bring a lawsuit to the court where the contract was signed (ie: People's Court of Xuanwu District, Nanjing City). </p>
+				</div>
+                        </div>
+                        <div class="panel-footer" style="text-align:center;">
+                            <a class="btn btn-warning btn-lg" href="project/launch/project/page">I agree to the above agreement</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="container" style="margin-top:20px;">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <div id="footer">
+                        <div class="footerNav">
+							<a rel="nofollow" th:href="@{/}"> About us</a> | <a rel="nofollow" th:href="@{/}"> Terms & Policies</a>        </div>
+                        </div>
+                        <div class="copyRight">
+                            Copyright ?2017-2017
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+      
+    </div>
+  </body>
+</html>

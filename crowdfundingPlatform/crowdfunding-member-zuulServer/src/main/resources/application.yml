@@ -1,0 +1,40 @@
+server:
+  port: 80
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka
+zuul:
+  ignored-services: "*"
+  sensitive-headers: "*"
+  routes:
+    crowd-portal:
+      service-id: dong-crowd-auth
+      path: /**
+    crowd-project:
+      service-id: dong-crowd-project
+      path: /project/**
+    crowd-order:
+      service-id: dong-crowd-order
+      path: /order/**
+
+spring:
+  application:
+    name: dong-crowd-zuul
+  redis:
+    host: 127.0.0.1
+  session:
+    store-type: redis
+
+ribbon:
+  ReadTimeout: 60000
+  connection-timeout: 3000
+
+hystrix:
+  command:
+    default:
+      execution:
+        iso lation:
+          thread:
+            timeoutInMilliseconds: 30000

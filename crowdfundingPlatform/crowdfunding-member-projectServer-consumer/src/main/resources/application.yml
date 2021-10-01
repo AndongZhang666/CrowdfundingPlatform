@@ -1,0 +1,36 @@
+server:
+  port: 5000
+spring:
+  application:
+    name: dong-crowd-project
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+  redis:
+    host: 127.0.0.1
+  session:
+    store-type: redis
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka
+aws:
+  s3:
+    AWSAccessKeyId: "AKIxxxQYT"
+    AWSSecretKeyId: "6uaxxxMoc"
+    bucketName: "andongxxx"
+#hystrix timeout
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled:
+            true isolation:
+              thread:
+                timeoutInMilliseconds: 300000
+#ribbon timeout
+ribbon:
+  ReadTimeout: 300000
+  ConnectTimeout: 300000

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<base th:href="@{/}" />
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/theme.css">
+<style>
+#footer {
+	padding: 15px 0;
+	background: #fff;
+	border-top: 1px solid #ddd;
+	text-align: center;
+}
+
+#topcontrol {
+	color: #fff;
+	z-index: 99;
+	width: 30px;
+	height: 30px;
+	font-size: 20px;
+	background: #222;
+	position: relative;
+	right: 14px !important;
+	bottom: 11px !important;
+	border-radius: 3px !important;
+}
+
+#topcontrol:after {
+	/*top: -2px;*/
+	left: 8.5px;
+	content: "\f106";
+	position: absolute;
+	text-align: center;
+	font-family: FontAwesome;
+}
+
+#topcontrol:hover {
+	color: #fff;
+	background: #18ba9b;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+.label-type, .label-status, .label-order {
+	background-color: #fff;
+	color: #f60;
+	padding: 5px;
+	border: 1px #f60 solid;
+}
+
+#typeList  :not (:first-child ) {
+	margin-top: 20px;
+}
+
+.label-txt {
+	margin: 10px 10px;
+	border: 1px solid #ddd;
+	padding: 4px;
+	font-size: 14px;
+}
+
+.panel {
+	border-radius: 0;
+}
+
+.progress-bar-default {
+	background-color: #ddd;
+}
+</style>
+</head>
+<body>
+	<div class="navbar-wrapper">
+		<div class="container">
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="index.html" th:href="@{/}" style="font-size: 32px;">Andong Crowdfunding Platform</a>
+					</div>
+					<div id="navbar" class="navbar-collapse collapse"
+						style="float: right;">
+						<ul class="nav navbar-nav">
+							<li class="dropdown"><a href="#" th:href="@{/}" class="dropdown-toggle"
+								data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>
+									[[${session.loginMember.userName}]]<span class="caret"></span></a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="member.html" th:href="@{/member/my/crowd}"><i
+											class="glyphicon glyphicon-scale"></i> Member center</a></li>
+									<li class="divider"></li>
+									<li><a href="http://18.221.173.223/auth/member/logout"><i
+											class="glyphicon glyphicon-off"></i> Logout</a></li>
+								</ul></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+	<div class="container theme-showcase" role="main">
+
+		<div class="container">
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<div class="panel panel-default">
+						<div class="panel-heading" style="text-align: center;">
+							<div class="container-fluid">
+								<div class="row clearfix">
+									<div class="col-md-3 column">
+										<div class="progress"
+											style="height: 50px; border-radius: 0; position: absolute; width: 75%; right: 49px;">
+											<div class="progress-bar progress-bar-default"
+												role="progressbar" aria-valuenow="60" aria-valuemin="0"
+												aria-valuemax="100" style="width: 100%; height: 50px;">
+												<div style="font-size: 16px; margin-top: 15px;">1.
+													Confirm return</div>
+											</div>
+										</div>
+										<div
+											style="right: 0; border: 10px solid #ddd; border-left-color: #88b7d5; border-width: 25px; position: absolute; border-left-color: rgba(221, 221, 221, 1); border-top-color: rgba(221, 221, 221, 0); border-bottom-color: rgba(221, 221, 221, 0); border-right-color: rgba(221, 221, 221, 0);">
+										</div>
+									</div>
+									<div class="col-md-3 column">
+										<div class="progress"
+											style="height: 50px; border-radius: 0; position: absolute; width: 75%; right: 49px;">
+											<div class="progress-bar progress-bar-success"
+												role="progressbar" aria-valuenow="60" aria-valuemin="0"
+												aria-valuemax="100" style="width: 100%; height: 50px;">
+												<div style="font-size: 16px; margin-top: 15px;">2.
+													Confirm order</div>
+											</div>
+										</div>
+										<div
+											style="right: 0; border: 10px solid #ddd; border-left-color: #88b7d5; border-width: 25px; position: absolute; border-left-color: rgba(92, 184, 92, 1); border-top-color: rgba(92, 184, 92, 0); border-bottom-color: rgba(92, 184, 92, 0); border-right-color: rgba(92, 184, 92, 0);">
+										</div>
+									</div>
+									<div class="col-md-3 column">
+										<div class="progress"
+											style="height: 50px; border-radius: 0; position: absolute; width: 75%; right: 49px;">
+											<div class="progress-bar progress-bar-default"
+												role="progressbar" aria-valuenow="60" aria-valuemin="0"
+												aria-valuemax="100" style="width: 100%; height: 50px;">
+												<div style="font-size: 16px; margin-top: 15px;">3. Checkout</div>
+											</div>
+										</div>
+										<div
+											style="right: 0; border: 10px solid #ddd; border-left-color: #88b7d5; border-width: 25px; position: absolute; border-left-color: rgba(221, 221, 221, 1); border-top-color: rgba(221, 221, 221, 0); border-bottom-color: rgba(221, 221, 221, 0); border-right-color: rgba(221, 221, 221, 0);">
+										</div>
+									</div>
+									<div class="col-md-3 column">
+										<div class="progress" style="height: 50px; border-radius: 0;">
+											<div class="progress-bar progress-bar-default"
+												role="progressbar" aria-valuenow="60" aria-valuemin="0"
+												aria-valuemax="100" style="width: 100%; height: 50px;">
+												<div style="font-size: 16px; margin-top: 15px;">4. Completed</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="container-fluid">
+								<div class="row clearfix">
+									<div class="col-md-12 column">
+										<div class="alert alert-warning alert-dismissable"
+											style="color: red;">
+											<button type="button" class="close" data-dismiss="alert"
+												aria-hidden="true">×</button>
+											<i class="glyphicon glyphicon-info-sign"></i> <strong>Please pay within 15 minutes after placing the order, otherwise your order will be automatically closed.</strong>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div id="address" class="container-fluid">
+								<div class="row clearfix">
+									<div class="col-md-12 column">
+										<blockquote
+											style="border-left: 5px solid #f60; color: #f60; padding: 0 0 0 20px;">
+											<b> Shipping address </b>
+										</blockquote>
+									</div>
+									<div class="col-md-12 column" style="padding: 0 120px;">
+										<div th:if="${#strings.isEmpty(session.addressVOList)}">No address found</div>
+										<div th:if="${not #strings.isEmpty(session.addressVOList)}">
+											<div th:each="address : ${session.addressVOList}" class="radio">
+												<label> <input type="radio" name="addressId" th:value="${address.id}"
+													id="optionsRadios1"/> [[${address.receiveName}]]
+													[[${address.phoneNum}]] [[${address.address}]]
+												</label>
+											</div>
+										</div>
+										<div class="radio">
+											<label> <input type="hidden" name="optionsRadios"
+												id="optionsRadios2" value="option2"> New address
+											</label>
+										</div>
+										<div
+											style="border: 10px solid #f60; border-bottom-color: #eceeef; border-width: 10px; width: 20px; margin-left: 20px; margin-top: -20px; border-left-color: rgba(221, 221, 221, 0); border-top-color: rgba(221, 221, 221, 0); border-right-color: rgba(221, 221, 221, 0);"></div>
+										<div class="panel panel-default"
+											style="border-style: dashed; background-color: #eceeef">
+											<div class="panel-body">
+												<div class="col-md-12 column">
+													<form action="order/save/address" method="post" class="form-horizontal">
+														<input type="hidden" name="memberId" th:value="${session.loginMember.id}" />
+														<div class="form-group">
+															<label class="col-sm-2 control-label">Receiver *</label>
+															<div class="col-sm-10">
+																<input type="text" name="receiveName" class="form-control"
+																	style="width: 200px;" placeholder="Name：xxxx">
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="col-sm-2 control-label">Phone *</label>
+															<div class="col-sm-10">
+																<input class="form-control" name="phoneNum" type="text"
+																	style="width: 200px;" placeholder="Enter phone number"></input>
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="col-sm-2 control-label">address *</label>
+															<div class="col-sm-10">
+																<input class="form-control" name="address" type="text"
+																	style="width: 400px;" placeholder="Enter address"></input>
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="inputEmail3" class="col-sm-2 control-label"></label>
+															<div class="col-sm-10">
+																<button type="submit" class="btn btn-primary">Confirm shipping info</button>
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="container-fluid">
+								<div class="row clearfix">
+									<div class="col-md-12 column">
+										<blockquote
+											style="border-left: 5px solid #f60; color: #f60; padding: 0 0 0 20px;">
+											<b> Invoice info </b>
+										</blockquote>
+									</div>
+									<div class="col-md-12 column" style="padding: 0 120px;">
+										<div class="radio">
+											<label> <input type="radio" name="invoiceRadio"
+												id="optionsRadios1" value="0" checked> No invoice
+											</label>
+										</div>
+										<div class="radio">
+											<label> <input type="radio" name="invoiceRadio"
+												id="optionsRadios2" value="1"> Invoice
+											</label>
+										</div>
+										<div
+											style="border: 10px solid #f60; border-bottom-color: #eceeef; border-width: 10px; width: 20px; margin-left: 20px; margin-top: -20px; border-left-color: rgba(221, 221, 221, 0); border-top-color: rgba(221, 221, 221, 0); border-right-color: rgba(221, 221, 221, 0);"></div>
+										<div class="panel panel-default"
+											style="border-style: dashed; background-color: #eceeef">
+											<div class="panel-body">
+												<div class="col-md-12 column">
+													<form class="form-horizontal">
+														<div class="form-group">
+															<label class="col-sm-2 control-label">Invoice title</label>
+															<div class="col-sm-10">
+																<input type="text" name="invoiceTitle" class="form-control"
+																	style="width: 200px;" placeholder="Company name">
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="container-fluid">
+								<div class="row clearfix">
+									<div class="col-md-12 column">
+										<blockquote
+											style="border-left: 5px solid #f60; color: #f60; padding: 0 0 0 20px;">
+											<b> Project info <a style="font-size: 12px;"
+												href="pay-step-1.html">Modify amount</a>
+											</b>
+										</blockquote>
+									</div>
+									<div class="col-md-12 column">
+										<table class="table table-bordered"
+											style="text-align: center;">
+											<thead>
+												<tr style="background-color: #ddd;">
+													<td>Project name</td>
+													<td>Sponsor</td>
+													<td width="300">Return item</td>
+													<td width="80">Return quantity</td>
+													<td>Price</td>
+													<td>Shipping fee</td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td th:text="${session.orderProjectVO.projectName}">活性富氢净水直饮机</td>
+													<td th:text="${session.orderProjectVO.launchName}">深圳市博实永道电子商务有限公司</td>
+													<td th:text="${session.orderProjectVO.returnContent}">每满1750人抽取一台活性富氢净水直饮机，至少抽取一台。抽取名额（小数点后一位四舍五入）=参与人数÷1750人，由苏宁官方抽取。</td>
+													<td th:text="${session.orderProjectVO.returnCount}">55</td>
+													<td style="color: #F60" th:text="${session.orderProjectVO.supportPrice}">￥ 1.00</td>
+													<td th:if="${session.orderProjectVO.freight == 0}">Free shipping</td>
+													<td th:if="${session.orderProjectVO.freight != 0}" th:text="${session.orderProjectVO.freight}">免运费</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="col-md-12 column">
+										<div class="form-group">
+											<label class="col-sm-2 control-label">Note</label>
+											<div class="col-sm-10">
+												<textarea class="form-control" name="remark" rows="1"
+													placeholder="You can enter some notes here"></textarea>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12 column">
+										<blockquote
+											style="border-left: 5px solid #f60; color: #f60; padding: 0 0 0 20px;">
+											<b> Bill </b>
+										</blockquote>
+									</div>
+
+									<div class="col-md-12 column">
+										<div class="alert alert-warning alert-dismissable"
+											style="text-align: right; border: 2px solid #ffc287;">
+											<ul style="list-style: none;">
+												<li style="margin-top: 10px;">Support amount：<span
+													style="color: red;">￥[[${session.orderProjectVO.returnCount*session.orderProjectVO.supportPrice}]]</span></li>
+												<li style="margin-top: 10px;">Shipping fee：<span
+													style="color: red;">￥[[${session.orderProjectVO.freight}]]</span></li>
+												<li style="margin-top: 10px; margin-bottom: 10px;"><h2>
+														Total：<span style="color: red;">$[[${session.orderProjectVO.returnCount*session.orderProjectVO.supportPrice+session.orderProjectVO.freight}]]</span>
+													</h2></li>
+												<li
+													style="margin-top: 10px; padding: 5px; border: 1px solid #F00; display: initial; background: #FFF;">
+													<i class="glyphicon glyphicon-info-sign"></i>
+												</li>
+												<li style="margin-top: 10px;">
+													Please pay within 15 minutes after placing the order, otherwise your order will be automatically closed.</li>
+												<li style="margin-top: 10px;">
+													<button id="payButton" disabled="disabled" type="button"
+														class="btn btn-warning btn-lg"
+														onclick="window.location.href='pay-step-3.html'">
+														<i class="glyphicon glyphicon-credit-card"></i> Checkout now
+													</button>
+												</li>
+												<li style="margin-top: 10px;">
+													<div class="checkbox">
+														<label>
+															<input id="knowRoleCheckBox" type="checkbox">I understand the risks and rules
+														</label>
+													</div>
+												</li>
+											</ul>
+
+
+										</div>
+									</div>
+									<div class="container">
+										<div class="row clearfix">
+											<div class="col-md-12 column">
+												<blockquote>
+													<p>
+														<i class="glyphicon glyphicon-info-sign"
+															style="color: #2a6496;"></i> Notification
+													</p>
+													<br> <span style="font-size: 12px;">1. Crowdfunding is not a commodity transaction, and there are certain risks. Supporters choose and support crowdfunding projects based on their own judgments, realize their dreams with the sponsors and get the rewards promised by the sponsors. <br>
+2. The crowdfunding platform only provides intermediary services such as platform cyberspace and technical support. Crowdfunding only exists between promoters and supporters. The legal consequences of using the crowdfunding platform shall be borne by the promoters and supporters. <br>
+3. This project must reach $xxxxx.xx before xxxx-xx-xx
+The target is considered successful, otherwise the already supported order will be cancelled. If the order is cancelled or the fundraising fails, the amount you supported will be returned to the original payment route. <br>
+4. Please pay within 15 minutes after supporting the project, otherwise your support request will be automatically closed. <br>
+5. After the crowdfunding is successful, the initiator will deliver the goods uniformly, and the after-sales service will be provided by the initiator; if the initiator fails to issue the return, delays the return, or does not provide the follow-up service of the return, you need to negotiate with the initiator directly. <br>
+6. If you do not agree with the above risk warning content, you have the right to choose not to support it; once you choose to support, it is deemed that you have confirmed and agreed to the above warning content.
+													</span>
+												</blockquote>
+											</div>
+										</div>
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="container" style="margin-top: 20px;">
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<div id="footer">
+						<div class="footerNav">
+							<a rel="nofollow" th:href="@{/}"> About us</a> | <a rel="nofollow" th:href="@{/}"> Terms & Policies</a>        </div>
+
+						</div>
+						<div class="copyRight">Copyright ?2010-2014atguigu.com
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- /container -->
+	
+	<!-- 为了收集当前页面中的所有数据，构造空表单 -->
+	<form id="summaryForm" action="order/generate/order" method="post"></form>
+	
+	<script src="jquery/jquery-2.1.1.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="script/docs.min.js"></script>
+	<script src="script/back-to-top.js"></script>
+	<script>
+	
+		$("#payButton").click(function(){
+			
+			// 1.收集所有要提交的表单项的数据
+			var addressId = $("[name=addressId]:checked").val();
+			var invoice = $("[name=invoiceRadio]:checked").val();
+			var invoiceTitle = $.trim($("[name=invoiceTitle]").val());
+			var remark = $.trim($("[name=remark]").val());
+			
+			// 2.将上面收集到的表单数据填充到空表单中并提交
+			$("#summaryForm")
+				.append("<input type='hidden' name='addressId' value='"+addressId+"'/>")
+				.append("<input type='hidden' name='invoice' value='"+invoice+"'/>")
+				.append("<input type='hidden' name='invoiceTitle' value='"+invoiceTitle+"'/>")
+				.append("<input type='hidden' name='orderRemark' value='"+remark+"'/>")
+				.submit();
+			
+		});
+	
+		$("#knowRoleCheckBox").click(function(){
+			var currentStatus = this.checked;
+			if(currentStatus) {
+				$("#payButton").prop("disabled", "");
+			}else{
+				$("#payButton").prop("disabled","disabled");
+			}
+		});
+		$('#myTab a').click(function(e) {
+			e.preventDefault()
+			$(this).tab('show')
+		})
+	</script>
+</body>
+</html>

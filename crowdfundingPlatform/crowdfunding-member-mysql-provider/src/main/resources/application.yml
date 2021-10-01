@@ -1,0 +1,40 @@
+server:
+  port: 2000
+spring:
+  application:
+    name: dong-crowd-mysql
+  datasource:
+    name: mydb
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/project_crowd?serverTimezone=UTC
+    username: root
+    password: f29292299
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      test-while-idle: true
+      validation-query: select 1
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka
+mybatis:
+  mapper-locations: classpath*:/mybatis/mapper/*Mapper.xml
+logging:
+  level:
+    com.dong.crowd.mapper: info
+    com.dong.crowd.test: info
+#hystrix timeout
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled:
+            true isolation:
+              thread:
+                timeoutInMilliseconds: 300000
+#ribbon timeout
+ribbon:
+  ReadTimeout: 300000
+  ConnectTimeout: 300000

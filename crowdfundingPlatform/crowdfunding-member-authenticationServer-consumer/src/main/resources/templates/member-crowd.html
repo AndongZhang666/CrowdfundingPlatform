@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <base th:href="@{/}">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <style>
+    #footer {
+      padding: 15px 0;
+      background: #fff;
+      border-top: 1px solid #ddd;
+      text-align: center;
+    }
+    #topcontrol {
+      color: #fff;
+      z-index: 99;
+      width: 30px;
+      height: 30px;
+      font-size: 20px;
+      background: #222;
+      position: relative;
+      right: 14px !important;
+      bottom: 11px !important;
+      border-radius: 3px !important;
+    }
+
+    #topcontrol:after {
+      /*top: -2px;*/
+      left: 8.5px;
+      content: "\f106";
+      position: absolute;
+      text-align: center;
+      font-family: FontAwesome;
+    }
+
+    #topcontrol:hover {
+      color: #fff;
+      background: #18ba9b;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+
+  </style>
+</head>
+<body>
+<div class="navbar-wrapper">
+  <div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" th:href="@{/}" style="font-size:32px;">Andong Crowdfunding Platform</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" style="float:right;">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> [[${session.loginMember.userName}]]<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a th:href="@{/member/my/crowd}"><i class="glyphicon glyphicon-scale"></i> Member center</a></li>
+                <li class="divider"></li>
+                <li><a href="index.html" th:href="@{/auth/member/logout}"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  </div>
+</div>
+<div class="container">
+  <div class="row clearfix">
+    <div class="col-sm-3 col-md-3 column">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="thumbnail" style="    border-radius: 0px;">
+            <img src="img/services-box1.jpg" class="img-thumbnail" alt="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera">
+            <div class="caption" style="text-align:center;">
+              <h3>
+                [[${session.loginMember.userName}]]
+              </h3>
+              <span class="label label-danger" style="cursor:pointer;">Not real-name authenticated</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="list-group">
+        <div class="list-group-item " style="cursor:pointer;">
+          <a th:href="@{/}">Home</a><span class="badge"><i class="glyphicon glyphicon-chevron-right"></i></span>
+        </div>
+        <div class="list-group-item"><a th:href="@{/auth/member/to/center/page}">Property overview</a>
+          <span class="badge"><i class="glyphicon glyphicon-chevron-right"></i></span>
+        </div>
+        <div class="list-group-item active" style="cursor:pointer;">
+          My crowdfunding<span class="badge"><i class="glyphicon glyphicon-chevron-right"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9 col-md-9 column">
+      <ul id="myTab" style="" class="nav nav-pills" role="tablist">
+        <li role="presentation" class="active"><p href="#home" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">My crowdfunding</p></li>
+        <li role="presentation">Crowdfunding property</li>
+      </ul>
+      <div id="myTabContent" class="tab-content" style="margin-top:10px;">
+        <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+
+          <ul id="myTab1" class="nav nav-tabs">
+            <li role="presentation">Click the button on the right to start your project</li>
+            <li class=" pull-right">
+
+              <button type="button" class="btn btn-warning" onclick="window.location.href='http://18.221.173.223/project/agree/protocol/page'">Start my crowdfunding</button>          </ul>
+          <div id="myTab1" class="tab-content" style="margin-top:10px;">
+            <div role="tabpanel" class="tab-pane fade active in" id="support" aria-labelledby="home-tab">
+              <div class="container-fluid">
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <span class="label label-warning">All</span> <span class="label" style="color:#000;">Payed</span> <span class="label " style="color:#000;">Unpaved</span>
+                  </div>
+                  <div class="col-md-12 column" style="margin-top:10px;padding:0;">
+                    <table class="table table-bordered" style="text-align:center;">
+                      <thead>
+                      <tr style="background-color:#ddd;">
+                        <td>Project Info</td>
+                        <td width="90">Date</td>
+                        <td width="120">Support amount($)</td>
+                        <td width="80">Return quantity</td>
+                        <td width="80">Status</td>
+                        <td width="120">Operations</td>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td style="vertical-align:middle;">
+                          <div class="thumbnail">
+                            <div class="caption">
+                              <h3>
+                                Hydrogen-rich water drinking machine
+                              </h3>
+                              <p>
+                                Order number:2x002231111
+                              </p>
+                              <p>
+                              <div style="float:left;"><i class="glyphicon glyphicon-screenshot" title="Target" ></i> Completed 100% </div>
+                              <div style="float:right;"><i title="Deadline" class="glyphicon glyphicon-calendar"></i> 8 days left </div>
+                              </p>
+                              <br>
+                              <div class="progress" style="margin-bottom: 4px;">
+                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                  <span >In progress</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="vertical-align:middle;">2020-05-23 11:31:22</td>
+                        <td style="vertical-align:middle;">1.00<br>(shipping fee：0.00 )</td>
+                        <td style="vertical-align:middle;">1</td>
+                        <td style="vertical-align:middle;">Order closed</td>
+                        <td style="vertical-align:middle;">
+                          <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                            <button type="button" class="btn btn-default">Delete order</button>
+                            <button type="button" class="btn btn-default">Order details</button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align:middle;">
+                          <div class="thumbnail">
+                            <div class="caption">
+                              <h3>
+                                BAVOSN xxxxxx
+                              </h3>
+                              <p>
+                                Order number:2x002231111
+                              </p>
+                              <p>
+                              <div style="float:left;"><i class="glyphicon glyphicon-screenshot" title="Target" ></i> Completed 100% </div>
+                              <div style="float:right;"><i title="Deadline" class="glyphicon glyphicon-calendar"></i> 8 days left </div>
+                              </p>
+                              <br>
+                              <div class="progress" style="margin-bottom: 4px;">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                  <span >Succeed</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="vertical-align:middle;">2017-05-23 11:31:22</td>
+                        <td style="vertical-align:middle;">1.00<br>(shipping fee：0.00 )</td>
+                        <td style="vertical-align:middle;">1</td>
+                        <td style="vertical-align:middle;">order closed</td>
+                        <td style="vertical-align:middle;">
+                          <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                            <button type="button" class="btn btn-default">Delete order</button>
+                            <button type="button" class="btn btn-default">Order details</button>
+                          </div>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="attension" aria-labelledby="attension-tab">
+              <div class="container-fluid">
+                <div class="row clearfix">
+                  <div class="col-md-12 column" style="padding:0;">
+                    <table class="table table-bordered" style="text-align:center;">
+                      <thead>
+                      <tr style="background-color:#ddd;">
+                        <td>Project Info</td>
+                        <td width="120">Supporters</td>
+                        <td width="120">Subscribers</td>
+                        <td width="120">Operations</td>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td style="vertical-align:middle;">
+                          <div class="thumbnail">
+                            <div class="caption">
+                              <p>
+                                BAVOSN Portable folding mobile lamp
+                              </p>
+                              <p>
+                                <i class="glyphicon glyphicon-jpy"></i> Collected 1000.0dollars
+                              </p>
+                              <p>
+                              <div style="float:left;"><i class="glyphicon glyphicon-screenshot" title="Target" ></i> Completed 100% </div>
+                              <div style="float:right;"><i class="glyphicon glyphicon-calendar"></i> 2 days left </div>
+                              </p>
+                              <br>
+                              <div class="progress" style="margin-bottom: 4px;">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                  <span >In progress</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="vertical-align:middle;">1</td>
+                        <td style="vertical-align:middle;">1</td>
+                        <td style="vertical-align:middle;">
+                          <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                            <button type="button" class="btn btn-default">Unsubscribe</button>
+                          </div>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade  " id="add" aria-labelledby="add-tab">
+              <div class="container-fluid">
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <span class="label label-warning">All</span> <span class="label" style="color:#000;">In progress</span> <span class="label " style="color:#000;">Succeed</span>  <span class="label " style="color:#000;">众筹失败</span>
+                  </div>
+                  <div class="col-md-12 column" style="padding:0;margin-top:10px;">
+                    <table class="table table-bordered" style="text-align:center;">
+                      <thead>
+                      <tr style="background-color:#ddd;">
+                        <td>Project Info</td>
+                        <td width="120">Amount</td>
+                        <td width="80">Status</td>
+                        <td width="120">Operations</td>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td style="vertical-align:middle;">
+                          <div class="thumbnail">
+                            <div class="caption">
+                              <p>
+                                BAVOSN Portable folding mobile lamp
+                              </p>
+                              <p>
+                              <div style="float:left;"><i class="glyphicon glyphicon-screenshot" title="Target" ></i> Completed 100% </div>
+                              <div style="float:right;"><i title="Deadline" class="glyphicon glyphicon-calendar"></i> 8 days left </div>
+                              </p>
+                              <br>
+                              <div class="progress" style="margin-bottom: 4px;">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                  <span >In progress</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td style="vertical-align:middle;">1.00<br>(shipping fee：0.00 )</td>
+                        <td style="vertical-align:middle;">draft</td>
+                        <td style="vertical-align:middle;">
+                          <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                            <button type="button" class="btn btn-default">Project preview</button>
+                            <button type="button" class="btn btn-default">Modify project</button>
+                            <button type="button" class="btn btn-default">Delete project</button>
+                            <button type="button" class="btn btn-default">Problem management</button>
+                          </div>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
+          Crowdfunding property
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" style="margin-top:20px;">
+  <div class="row clearfix">
+    <div class="col-md-12 column">
+      <div id="footer">
+        <div class="footerNav">
+          <a rel="nofollow" th:href="@{/}"> About us</a> | <a rel="nofollow" th:href="@{/}"> Terms & Policies</a>        </div>
+        <div class="copyRight">
+          Copyright ?2017-2017atguigu.com
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="jquery/jquery-2.1.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="script/docs.min.js"></script>
+<script src="script/back-to-top.js"></script>
+<script>
+  $('#myTab a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  })
+  $('#myTab1 a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  })
+</script>
+</body>
+</html>

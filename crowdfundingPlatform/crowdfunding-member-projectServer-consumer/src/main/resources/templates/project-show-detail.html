@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<base th:href="@{/}" />
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/theme.css">
+<style>
+#footer {
+	padding: 15px 0;
+	background: #fff;
+	border-top: 1px solid #ddd;
+	text-align: center;
+}
+
+#topcontrol {
+	color: #fff;
+	z-index: 99;
+	width: 30px;
+	height: 30px;
+	font-size: 20px;
+	background: #222;
+	position: relative;
+	right: 14px !important;
+	bottom: 11px !important;
+	border-radius: 3px !important;
+}
+
+#topcontrol:after {
+	/*top: -2px;*/
+	left: 8.5px;
+	content: "\f106";
+	position: absolute;
+	text-align: center;
+	font-family: FontAwesome;
+}
+
+#topcontrol:hover {
+	color: #fff;
+	background: #18ba9b;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover
+	{
+	border-bottom-color: #ddd;
+}
+
+.nav-tabs>li>a {
+	border-radius: 0;
+}
+</style>
+</head>
+<body>
+	<div class="navbar-wrapper">
+		<div class="container">
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+						<a class="navbar-brand" th:href="@{/}" href="index.html" style="font-size: 32px;">Andong Crowdfunding Platform</a>
+					</div>
+					<div id="navbar" class="navbar-collapse collapse"
+						 style="float: right;">
+						<ul class="nav navbar-nav">
+							<li class="dropdown"><a th:href="@{/}" class="dropdown-toggle"
+													data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>
+								[[${session.loginMember.userName}]]<span class="caret"></span></a>
+								<ul class="dropdown-menu" role="menu">
+									<li><i
+											class="glyphicon glyphicon-scale"></i> Member center</li>
+									<li class="divider"></li>
+									<li><a href="http://18.221.173.223/auth/member/logout"><i
+											class="glyphicon glyphicon-off"></i> Logout</a></li>
+								</ul></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+	<div class="container theme-showcase" role="main">
+
+		<div class="container">
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<nav class="navbar navbar-default" role="navigation">
+						<div class="collapse navbar-collapse"
+							id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav">
+								<li>
+									<a rel="nofollow" th:href="@{/}" href="index.html"><i class="glyphicon glyphicon-home"></i> Home</a>
+								</li>
+								<li >
+									<a rel="nofollow" th:href="@{/}" href="projects.html"><i class="glyphicon glyphicon-th-large"></i>  Project Overview</a>
+								</li>
+								<li class="active">
+									<a rel="nofollow" th:href="@{/}" href="javascript:;"><i class="glyphicon glyphicon-edit"></i> Start my crowdfunding</a>
+								</li>
+								<li>
+									<a rel="nofollow" th:href="@{/}" href="minecrowdfunding.html"><i class="glyphicon glyphicon-user"></i> My crowdfunding</a>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+
+		<div th:if="${#strings.isEmpty(detailProjectVO)}">查询项目详情信息失败！</div>
+		<div th:if="${not #strings.isEmpty(detailProjectVO)}">
+			<div class="container">
+				<div class="row clearfix">
+					<div class="col-md-12 column">
+						<div class="jumbotron nofollow" style="padding-top: 10px;">
+							<h3 th:text="${detailProjectVO.projectName}">酷驰触控龙头，智享厨房黑科技</h3>
+							<div style="float: left; width: 70%;" th:text="${detailProjectVO.projectDesc}">智能时代，酷驰触控厨房龙头，让煮妇解放双手，触发更多烹饪灵感，让美味信手拈来。</div>
+							<div style="float: right;">
+								<button type="button" class="btn btn-default">
+									<i style="color: #f60" class="glyphicon glyphicon-heart"></i>
+									Subscriptions [[${detailProjectVO.followerCount}]]
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row clearfix">
+					<div class="col-md-12 column">
+						<div class="row clearfix">
+							<div class="col-md-8 column" th:if="${#strings.isEmpty(detailProjectVO.detailPicturePathList)}">Failed</div>
+							<div class="col-md-8 column" th:if="${not #strings.isEmpty(detailProjectVO.detailPicturePathList)}">
+								<img alt="140x140" width="740" src="img/product_detail_head.jpg" th:src="${detailProjectVO.headerPicturePath}" />
+								<img alt="140x140" width="740" src="img/product_detail_body.jpg" th:each="detailPicturePath : ${detailProjectVO.detailPicturePathList}" th:src="${detailPicturePath}" />
+							</div>
+							<div class="col-md-4 column">
+								<div class="panel panel-default" style="border-radius: 0px;">
+									<div class="panel-heading"
+										style="background-color: #fff; border-color: #fff;">
+										<span class="label label-success"><i
+											class="glyphicon glyphicon-tag"></i> [[${detailProjectVO.statusText}]]</span>
+									</div>
+									<div class="panel-body">
+										<h3>Funds raised: $[[${detailProjectVO.supportMoney}]]</h3>
+										<p>
+											<span>Target amount: $[[${detailProjectVO.money}]]</span><span style="float: right;">Complete
+												: [[${detailProjectVO.percentage}]]%</span>
+										</p>
+										<div class="progress"
+											style="height: 10px; margin-bottom: 5px;">
+											<div class="progress-bar progress-bar-success"
+												role="progressbar" aria-valuenow="[[${detailProjectVO.percentage}]]" aria-valuemin="0"
+												aria-valuemax="100" style="width: 60%;" th:style="'width: '+${detailProjectVO.percentage}+'%;'"></div>
+										</div>
+										<p>[[${detailProjectVO.lastDay}]] days left</p>
+										<div>
+											<p>
+												<span>[[${detailProjectVO.supporterCount}]] supporters</span>
+											</p>
+										</div>
+									</div>
+									<div class="panel-footer"
+										style="background-color: #fff; border-top: 1px solid #ddd; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;">
+										<div class="container-fluid">
+											<div class="row clearfix">
+												<div class="col-md-3 column" style="padding: 0;">
+													<img alt="140x140" src="img/services-box2.jpg"
+														data-holder-rendered="true"
+														style="width: 80px; height: 80px;">
+												</div>
+												<div class="col-md-9 column">
+													<div class="">
+														<h4>
+															<b>Kuchi Tech</b> <span
+																style="float: right; font-size: 12px;"
+																class="label label-success">Verified</span>
+														</h4>
+														<p style="font-size: 12px">
+															Kuchi is a young kitchen and bathroom technology company. We have a vigorous, passionate, creative and practical team.</p>
+														<p style="font-size: 12px">Customer Service: 123-456-7890</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div th:if="${#strings.isEmpty(detailProjectVO.detailReturnVOList)}">No return info found</div>
+								<div th:if="${not #strings.isEmpty(detailProjectVO.detailReturnVOList)}">
+									<div th:each="return : ${detailProjectVO.detailReturnVOList}" class="panel panel-default" style="border-radius: 0px;">
+										<div class="panel-heading">
+											<h3>
+												$[[${return.supportMoney}]]
+												<span th:if="${return.signalPurchase == 0}" style="float: right; font-size: 12px;">No limit, # supporters</span>
+												<span th:if="${return.signalPurchase == 1}" style="float: right; font-size: 12px;">Limit [[${return.purchase}]] supporters</span>
+											</h3>
+										</div>
+										<div class="panel-body">
+											<p th:if="${return.freight==0}">Shipping fee: free</p>
+											<p th:if="${return.freight>0}">Shipping fee: [[${return.freight}]]</p>
+											<p>Estimated delivery date: [[${return.returnDate}]] days</p>
+											<a th:href="'http://18.221.173.223/order/confirm/return/info/'+${detailProjectVO.projectId}+'/'+${return.returnId}" class="btn btn-warning btn-lg">Support</a>
+
+											<br>
+											<br>
+											<p th:text="${return.content}">Thanks for your support。</p>
+										</div>
+									</div>
+								</div>
+								<div class=" panel panel-default" style="border-radius: 0px;">
+									<div class="panel-heading">
+										<h3>Risk control</h3>
+									</div>
+									<div class="panel-body">
+										<p>
+											1. Crowdfunding is not a commodity transaction, and there are certain risks. Supporters choose and support crowdfunding projects based on their own judgments, realize their dreams with the sponsors and get the rewards promised by the sponsors. <br>
+											2. The crowdfunding platform only provides intermediary services such as platform cyberspace and technical support. Crowdfunding only exists between promoters and supporters. The legal consequences of using the crowdfunding platform shall be borne by the promoters and supporters. <br>
+											3. After the crowdfunding is successful, the initiator will deliver the goods uniformly, and the after-sales service will be provided by the initiator; if the initiator fails to issue the return, delays the return, or does not provide the follow-up service of the return, you need to negotiate with the initiator directly. <br>
+											4. If you do not agree with the above risk warning content, you have the right to choose not to support it; once you choose to support, it is deemed that you have confirmed and agreed to the above warning content.
+										</p>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container" style="margin-top: 20px;">
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<div id="footer">
+						<div class="footerNav">
+							<a rel="nofollow" th:href="@{/}"> About us</a> | <a rel="nofollow" th:href="@{/}"> Terms & Policies</a>        </div>
+
+					</div>
+						<div class="copyRight">Copyright ?2010-2014atguigu.com
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- /container -->
+
+	</div>
+
+	<script src="jquery/jquery-2.1.1.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="script/docs.min.js"></script>
+	<script src="script/back-to-top.js"></script>
+<!--	<script>-->
+<!--		$(".prjtip img").css("cursor", "pointer");-->
+<!--		$(".prjtip img").click(function() {-->
+<!--			window.location.href = 'project.html';-->
+<!--		});-->
+<!--	</script>-->
+</body>
+</html>

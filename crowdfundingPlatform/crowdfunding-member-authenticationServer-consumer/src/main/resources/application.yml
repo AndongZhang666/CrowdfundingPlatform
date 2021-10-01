@@ -1,0 +1,35 @@
+server:
+  port: 4000
+spring:
+  application:
+    name: dong-crowd-auth
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+  redis:
+    host: localhost
+  session:
+    store-type: redis
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka
+aws:
+  sms:
+    AWSAccessKeyId: "AKIxxxQYT"
+    AWSSecretKeyId: "6uaxxxMoc"
+#hystrix timeout
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled:
+            true isolation:
+              thread:
+                timeoutInMilliseconds: 300000
+#ribbon timeout
+ribbon:
+  ReadTimeout: 300000
+  ConnectTimeout: 300000
